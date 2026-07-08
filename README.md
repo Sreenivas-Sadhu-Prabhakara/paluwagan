@@ -71,10 +71,10 @@ python3 -m http.server 4173
 
 Then visit <http://localhost:4173/>.
 
-**Hosted:** <https://<user>.github.io/paluwagan/>
+**Hosted:** <https://sreenivas-sadhu-prabhakara.github.io/paluwagan/>
 
-*(Replace `<user>` with the GitHub account hosting it. The included Pages workflow
-deploys the repository root as-is.)*
+*(The included GitHub Pages workflow deploys the repository root as-is on every push
+to `main`.)*
 
 Once loaded, the app works fully offline and can be installed as an app on phones
 and desktops (it registers a service worker to cache the shell).

@@ -1,3 +1,6 @@
+<!doctype html>
+<html lang="en">
+<head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta
@@ -11,9 +14,60 @@
   name="description"
   content="A no-login, offline trust ledger for savings groups (paluwagan / ROSCA / chit fund / tanda / susu). Your data never leaves your device."
 />
+<meta name="robots" content="index, follow" />
+<meta name="author" content="Sreenivas Sadhu" />
+<meta name="keywords" content="paluwagan, ROSCA, rotating savings, chit fund, tanda, susu, hui, ajo, stokvel, committee, savings group tracker, paluwagan app" />
+<link rel="canonical" href="https://sreenivas-sadhu-prabhakara.github.io/paluwagan/" />
 <title>paluwagan — a trust ledger for savings groups</title>
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="paluwagan" />
+<meta property="og:title" content="paluwagan — a trust ledger for savings groups" />
+<meta property="og:description" content="A no-login, offline ledger for rotating savings groups (paluwagan / ROSCA / chit fund / tanda / susu). Track who paid, whose turn it is, and each member's trust — all on your own device." />
+<meta property="og:url" content="https://sreenivas-sadhu-prabhakara.github.io/paluwagan/" />
+<meta property="og:image" content="https://sreenivas-sadhu-prabhakara.github.io/paluwagan/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="paluwagan — a trust ledger for savings groups (ROSCA, chit fund, tanda, susu). Offline, no login." />
+<meta property="og:locale" content="en_US" />
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="paluwagan — a trust ledger for savings groups" />
+<meta name="twitter:description" content="Offline, no-login ledger for rotating savings groups (ROSCA / chit fund / tanda / susu). Track payments, the payout rotation, and trust — on your device only." />
+<meta name="twitter:image" content="https://sreenivas-sadhu-prabhakara.github.io/paluwagan/og-image.png" />
+<meta name="twitter:image:alt" content="paluwagan — an offline trust ledger for savings groups." />
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "paluwagan",
+  "description": "An offline, no-login ledger for informal rotating savings groups (paluwagan, ROSCA, chit fund, tanda, susu, hui, ajo). Tracks contributions, the payout rotation, and each member's on-time trust score. All data stays on the user's device.",
+  "url": "https://sreenivas-sadhu-prabhakara.github.io/paluwagan/",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any (modern web browser)",
+  "browserRequirements": "Requires JavaScript and a modern browser",
+  "isAccessibleForFree": true,
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "license": "https://opensource.org/licenses/MIT",
+  "author": { "@type": "Person", "name": "Sreenivas Sadhu" },
+  "featureList": [
+    "Track each member's contribution per period",
+    "Rotating payout order with a visual dial",
+    "On-time trust score per member",
+    "Balances and full schedule view",
+    "Export, import, and delete all your data",
+    "Works offline, no account, nothing leaves your device"
+  ]
+}
+</script>
 <link rel="manifest" href="manifest.webmanifest" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
 <link rel="stylesheet" href="src/style.css" />
+</head>
+<body>
 
 <a class="skip-link" href="#main">Skip to content</a>
 
@@ -213,3 +267,5 @@
 </footer>
 
 <script type="module" src="src/app.js"></script>
+</body>
+</html>
