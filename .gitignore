@@ -1,0 +1,16 @@
+# This project has no build step and no dependencies, so there is little to ignore.
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Local tooling / preview scaffolding (not part of the app)
+.claude/

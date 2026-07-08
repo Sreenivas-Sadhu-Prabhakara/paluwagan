@@ -1,0 +1,8 @@
+version: 2
+updates:
+  # This project has no runtime dependencies; the only thing to keep current is
+  # the GitHub Actions used by the workflows.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

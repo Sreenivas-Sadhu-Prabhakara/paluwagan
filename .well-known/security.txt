@@ -1,0 +1,6 @@
+# paluwagan security contact (RFC 9116)
+Contact: mailto:privacy@example.com
+Expires: 2027-01-01T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://example.github.io/paluwagan/.well-known/security.txt
+Policy: https://example.github.io/paluwagan/SECURITY.md

@@ -1,0 +1,215 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta
+  http-equiv="Content-Security-Policy"
+  content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'; worker-src 'self'; manifest-src 'self'"
+/>
+<meta name="color-scheme" content="light dark" />
+<meta name="theme-color" content="#0f3d3e" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0a2526" media="(prefers-color-scheme: dark)" />
+<meta
+  name="description"
+  content="A no-login, offline trust ledger for savings groups (paluwagan / ROSCA / chit fund / tanda / susu). Your data never leaves your device."
+/>
+<title>paluwagan — a trust ledger for savings groups</title>
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="stylesheet" href="src/style.css" />
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">
+      <!-- rotation glyph: a ring with a dot that has "moved" one step -->
+      <svg viewBox="0 0 32 32" width="28" height="28" role="img" aria-hidden="true">
+        <circle cx="16" cy="16" r="12" fill="none" stroke="currentColor" stroke-width="2.5" opacity="0.45" />
+        <path d="M16 4 A12 12 0 0 1 27 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+        <circle cx="27" cy="12" r="3.4" fill="currentColor" />
+      </svg>
+    </span>
+    <span class="brand-name">paluwagan</span>
+  </div>
+  <div class="topbar-actions">
+    <span class="privacy-chip" title="This app makes no network requests. Enforced by Content-Security-Policy connect-src 'none'.">
+      <span class="dot" aria-hidden="true"></span>
+      Your data never leaves this device
+    </span>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <!-- Empty / onboarding state -->
+  <section id="view-empty" class="view" hidden>
+    <div class="hero">
+      <p class="eyebrow">ROSCA · chit fund · tanda · susu · hui · ajo</p>
+      <h1 class="hero-title">The notebook that never<br />loses track of the turn.</h1>
+      <p class="hero-lede">
+        A savings circle where everyone chips in each period and one member takes the pot — until it has gone all the
+        way around. paluwagan keeps the paid marks, the payout order, and the trust, on your device and nowhere else.
+      </p>
+      <button class="btn btn-primary btn-lg" id="empty-create">Start a group</button>
+      <button class="btn btn-ghost btn-lg" id="empty-import">Import a saved file</button>
+    </div>
+    <ul class="hero-points" aria-label="What this does">
+      <li><strong>Track the pot.</strong> Mark who paid each period, see the total collected and who still owes.</li>
+      <li><strong>Rotate fairly.</strong> Set the payout order once; the schedule follows it to the last period.</li>
+      <li><strong>Build trust.</strong> Each member earns an on-time rate — the trust in trust ledger.</li>
+    </ul>
+  </section>
+
+  <!-- Group view -->
+  <section id="view-group" class="view" hidden>
+    <div class="group-head">
+      <div class="group-switch">
+        <label class="sr-only" for="group-select">Active group</label>
+        <select id="group-select" class="group-select"></select>
+        <button class="btn btn-ghost btn-sm" id="new-group-btn" title="Create another group">+ New</button>
+      </div>
+      <div class="group-tools">
+        <button class="btn btn-ghost btn-sm" id="edit-group-btn">Edit group</button>
+        <button class="btn btn-ghost btn-sm" id="data-btn">Data</button>
+      </div>
+    </div>
+
+    <!-- Dashboard -->
+    <section class="dash" aria-labelledby="dash-h">
+      <h2 id="dash-h" class="sr-only">Dashboard</h2>
+      <div class="dash-grid">
+        <div class="ring-card">
+          <div class="ring-wrap" id="ring-wrap" role="img" aria-label="Payout rotation dial"></div>
+          <p class="ring-caption" id="ring-caption"></p>
+        </div>
+        <div class="stat-stack">
+          <div class="stat stat-accent">
+            <span class="stat-label">Receiving now</span>
+            <span class="stat-value" id="stat-now">—</span>
+            <span class="stat-sub" id="stat-now-sub"></span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Up next</span>
+            <span class="stat-value" id="stat-next">—</span>
+            <span class="stat-sub" id="stat-next-sub"></span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">In the pot this period</span>
+            <span class="stat-value" id="stat-pot">—</span>
+            <span class="stat-sub" id="stat-pot-sub"></span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Still owing this period</span>
+            <span class="stat-value" id="stat-owing">—</span>
+            <span class="stat-sub" id="stat-owing-sub"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tabs -->
+    <nav class="tabs" role="tablist" aria-label="Views">
+      <button class="tab" role="tab" id="tab-ledger" aria-controls="panel-ledger" aria-selected="true">Ledger</button>
+      <button class="tab" role="tab" id="tab-members" aria-controls="panel-members" aria-selected="false" tabindex="-1">Members &amp; trust</button>
+      <button class="tab" role="tab" id="tab-schedule" aria-controls="panel-schedule" aria-selected="false" tabindex="-1">Full schedule</button>
+    </nav>
+
+    <div id="panel-ledger" class="panel" role="tabpanel" aria-labelledby="tab-ledger" tabindex="0">
+      <div class="period-nav" id="period-nav"></div>
+      <div id="ledger-body"></div>
+    </div>
+
+    <div id="panel-members" class="panel" role="tabpanel" aria-labelledby="tab-members" tabindex="0" hidden>
+      <div id="members-body"></div>
+    </div>
+
+    <div id="panel-schedule" class="panel" role="tabpanel" aria-labelledby="tab-schedule" tabindex="0" hidden>
+      <div class="table-scroll" id="schedule-body"></div>
+    </div>
+  </section>
+</main>
+
+<!-- Live region for status announcements -->
+<div class="sr-only" id="live" aria-live="polite" role="status"></div>
+
+<!-- Dialog: group create / edit -->
+<dialog id="group-dialog" class="dialog">
+  <form method="dialog" id="group-form" class="dialog-form">
+    <h2 class="dialog-title" id="group-dialog-title">New group</h2>
+
+    <div class="field">
+      <label for="f-name">Group name</label>
+      <input id="f-name" name="name" type="text" maxlength="80" required placeholder="e.g. Barangay Meetup Fund" />
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label for="f-amount">Contribution per period</label>
+        <input id="f-amount" name="contribution" type="number" min="0" step="0.01" inputmode="decimal" required placeholder="1000" />
+      </div>
+      <div class="field field-narrow">
+        <label for="f-currency">Currency</label>
+        <select id="f-currency" name="currency"></select>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label for="f-frequency">Frequency</label>
+        <select id="f-frequency" name="frequency">
+          <option value="weekly">Weekly</option>
+          <option value="biweekly">Every 2 weeks</option>
+          <option value="monthly" selected>Monthly</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="f-start">Start date</label>
+        <input id="f-start" name="startDate" type="date" required />
+      </div>
+    </div>
+
+    <fieldset class="field members-field">
+      <legend>Members &amp; payout order</legend>
+      <p class="hint">The order below is the order members receive the pot. Reorder with the arrows.</p>
+      <ul class="member-editor" id="member-editor"></ul>
+      <div class="add-member">
+        <label class="sr-only" for="f-newmember">New member name</label>
+        <input id="f-newmember" type="text" maxlength="60" placeholder="Add a member…" />
+        <button type="button" class="btn btn-ghost btn-sm" id="add-member-btn">Add</button>
+      </div>
+      <p class="error-text" id="member-error" hidden></p>
+    </fieldset>
+
+    <div class="dialog-actions">
+      <button type="button" class="btn btn-ghost" id="group-cancel">Cancel</button>
+      <button type="submit" class="btn btn-primary" id="group-save">Save group</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Dialog: data controls -->
+<dialog id="data-dialog" class="dialog">
+  <div class="dialog-form">
+    <h2 class="dialog-title">Your data</h2>
+    <p class="dialog-lede">
+      Everything lives in this browser's local storage. Nothing is ever sent anywhere — the app is blocked from making
+      network requests. Use these controls to move or erase your data.
+    </p>
+    <div class="data-actions">
+      <button class="btn btn-secondary" id="export-btn">Export to file</button>
+      <button class="btn btn-secondary" id="import-btn">Import from file</button>
+      <button class="btn btn-danger" id="delete-btn">Delete everything</button>
+    </div>
+    <input type="file" id="import-file" accept="application/json,.json" hidden />
+    <p class="dialog-note" id="data-note" aria-live="polite"></p>
+    <div class="dialog-actions">
+      <button class="btn btn-ghost" id="data-close">Close</button>
+    </div>
+  </div>
+</dialog>
+
+<footer class="site-foot">
+  <p>
+    paluwagan is free, open-source software. It stores your group's records only on this device and cannot transmit
+    them. <a href="PRIVACY.md">Privacy</a> · <a href="COMPLIANCE.md">Compliance</a> · <a href="SECURITY.md">Security</a>
+  </p>
+</footer>
+
+<script type="module" src="src/app.js"></script>

@@ -1,0 +1,13 @@
+{
+  "name": "paluwagan — trust ledger for savings groups",
+  "short_name": "paluwagan",
+  "description": "A no-login, offline trust ledger for informal savings groups (paluwagan / ROSCA / chit fund / tanda / susu). Your data never leaves your device.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f6f1e7",
+  "theme_color": "#0f3d3e",
+  "lang": "en",
+  "categories": ["finance", "productivity", "utilities"]
+}

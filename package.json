@@ -1,0 +1,28 @@
+{
+  "name": "paluwagan",
+  "version": "1.0.0",
+  "description": "An offline, no-login trust ledger for informal savings groups (paluwagan / ROSCA / chit fund / tanda / susu / hui / ajo). Runs entirely in the browser; your data never leaves your device.",
+  "type": "module",
+  "private": false,
+  "license": "MIT",
+  "author": "Sreenivas Sadhu",
+  "keywords": [
+    "paluwagan",
+    "rosca",
+    "chit-fund",
+    "tanda",
+    "susu",
+    "hui",
+    "ajo",
+    "savings-group",
+    "offline-first",
+    "privacy",
+    "no-backend"
+  ],
+  "scripts": {
+    "test": "node --test \"test/**/*.test.js\""
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
