@@ -113,6 +113,15 @@ Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) and th
 [Code of Conduct](CODE_OF_CONDUCT.md). In short: keep it dependency-free, run
 `npm test`, and open a pull request.
 
+## Disclaimer
+
+paluwagan is a private record-keeping aid, not a financial product. It is **not
+financial, legal, tax, or accounting advice**, and it does not hold, move, or manage
+money. You and your group remain solely responsible for your own savings arrangement —
+contributions, payouts, and any disputes. The software is provided under the MIT
+License, "as is" and without warranty of any kind; the authors accept no liability for
+any loss, dispute, or damage arising from its use.
+
 ## License
 
 [MIT](LICENSE) © 2026 Sreenivas Sadhu
